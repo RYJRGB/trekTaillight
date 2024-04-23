@@ -88,11 +88,11 @@ int main(void)
   MX_GPIO_Init();
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
-  HAL_Delay(100);
+  HAL_Delay(1000);
   HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, SET); //on board red LED PC13
   HAL_GPIO_WritePin(VLED_EN_GPIO_Port, VLED_EN_Pin, SET); //toggle VLED enable PB15
   HAL_GPIO_WritePin(BRAKE_EN_GPIO_Port,BRAKE_EN_Pin, SET); //toggle VLED enable PB1
-  HAL_Delay(100);
+  HAL_Delay(1000);
 
   /* USER CODE END 2 */
 
