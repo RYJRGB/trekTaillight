@@ -89,10 +89,12 @@ int main(void)
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
   HAL_Delay(1000);
+  HAL_GPIO_WritePin(RED_EN_GPIO_Port, RED_EN_Pin, SET); //on board red LED PC13
   HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, SET); //on board red LED PC13
   HAL_GPIO_WritePin(VLED_EN_GPIO_Port, VLED_EN_Pin, SET); //toggle VLED enable PB15
   HAL_GPIO_WritePin(BRAKE_EN_GPIO_Port,BRAKE_EN_Pin, SET); //toggle VLED enable PB1
   HAL_Delay(1000);
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, RESET); //on board red LED PC13
 
   /* USER CODE END 2 */
 
@@ -109,10 +111,11 @@ int main(void)
 //	  HAL_GPIO_WritePin(BRAKE_EN_GPIO_Port, BRAKE_EN_Pin, RESET); //toggle Brake PB0
 //	  HAL_GPIO_WritePin(BACKUP_EN_GPIO_Port, BACKUP_EN_Pin, RESET); //on board red LED PC13
 //	  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, RESET);
-	  HAL_Delay(1000);
+	  HAL_Delay(100);
 	  HAL_GPIO_TogglePin(VLED_EN_GPIO_Port, VLED_EN_Pin); //toggle VLED enable PB15
 	  HAL_GPIO_TogglePin(BRAKE_EN_GPIO_Port, BRAKE_EN_Pin); //toggle Brake PB0
 	  HAL_GPIO_TogglePin(BACKUP_EN_GPIO_Port, BACKUP_EN_Pin); //toggle Backup PB1
+	  HAL_GPIO_TogglePin(RED_EN_GPIO_Port, RED_EN_Pin); //on board red LED PB2
 
 	  HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin); //on board red LED PC13
 	  //HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin); //on board red LED PC13
@@ -261,11 +264,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : EXT_TURN_IN_Pin */
-  GPIO_InitStruct.Pin = EXT_TURN_IN_Pin;
+  /*Configure GPIO pins : EXT_TURN_IN_Pin PB7 */
+  GPIO_InitStruct.Pin = EXT_TURN_IN_Pin|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(EXT_TURN_IN_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
