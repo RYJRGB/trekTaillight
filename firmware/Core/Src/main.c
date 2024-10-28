@@ -39,7 +39,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-CAN_HandleTypeDef hcan;
 
 /* USER CODE BEGIN PV */
 
@@ -48,7 +47,6 @@ CAN_HandleTypeDef hcan;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_CAN_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -86,14 +84,13 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_CAN_Init();
   /* USER CODE BEGIN 2 */
   HAL_Delay(1000);
-  HAL_GPIO_WritePin(RED_EN_GPIO_Port, RED_EN_Pin, SET); //on board red LED PC13
-  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, SET); //on board red LED PC13
-  HAL_GPIO_WritePin(VLED_EN_GPIO_Port, VLED_EN_Pin, SET); //toggle VLED enable PB15
-  HAL_GPIO_WritePin(BRAKE_EN_GPIO_Port,BRAKE_EN_Pin, SET); //toggle VLED enable PB1
-  HAL_Delay(1000);
+  //HAL_GPIO_WritePin(RED_EN_GPIO_Port, RED_EN_Pin, SET); //on board red LED PC13
+  //HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, SET); //on board red LED PC13
+  //HAL_GPIO_WritePin(VLED_EN_GPIO_Port, VLED_EN_Pin, SET); //toggle VLED enable PB15
+  //HAL_GPIO_WritePin(BRAKE_EN_GPIO_Port,BRAKE_EN_Pin, SET); //toggle VLED enable PB1
+  //HAL_Delay(1000);
   HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, RESET); //on board red LED PC13
 
   /* USER CODE END 2 */
@@ -111,13 +108,17 @@ int main(void)
 //	  HAL_GPIO_WritePin(BRAKE_EN_GPIO_Port, BRAKE_EN_Pin, RESET); //toggle Brake PB0
 //	  HAL_GPIO_WritePin(BACKUP_EN_GPIO_Port, BACKUP_EN_Pin, RESET); //on board red LED PC13
 //	  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, RESET);
-	  HAL_Delay(100);
-	  HAL_GPIO_TogglePin(VLED_EN_GPIO_Port, VLED_EN_Pin); //toggle VLED enable PB15
+//	  HAL_Delay(100);
+	  //HAL_GPIO_TogglePin(VLED_EN_GPIO_Port, VLED_EN_Pin); //toggle VLED enable PB15
+	  //HAL_Delay(100);
+	  //HAL_GPIO_TogglePin(BRAKE_EN_GPIO_Port, BRAKE_EN_Pin);
+	  //HAL_Delay(1000);
+
 	  HAL_GPIO_TogglePin(BRAKE_EN_GPIO_Port, BRAKE_EN_Pin); //toggle Brake PB0
 	  HAL_GPIO_TogglePin(BACKUP_EN_GPIO_Port, BACKUP_EN_Pin); //toggle Backup PB1
-	  HAL_GPIO_TogglePin(RED_EN_GPIO_Port, RED_EN_Pin); //on board red LED PB2
+//	  HAL_GPIO_TogglePin(RED_EN_GPIO_Port, RED_EN_Pin); //on board red LED PB2
 
-	  HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin); //on board red LED PC13
+	  //HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin); //on board red LED PC13
 	  //HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin); //on board red LED PC13
 //	  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, RESET);
 //	  HAL_GPIO_WritePin(VLED_EN_GPIO_Port, VLED_EN_Pin, RESET); //toggle Brake PB0
@@ -147,7 +148,7 @@ void SystemClock_Config(void)
   * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEState = RCC_HSE_OFF;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -174,43 +175,6 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief CAN Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_CAN_Init(void)
-{
-
-  /* USER CODE BEGIN CAN_Init 0 */
-
-  /* USER CODE END CAN_Init 0 */
-
-  /* USER CODE BEGIN CAN_Init 1 */
-
-  /* USER CODE END CAN_Init 1 */
-  hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 16;
-  hcan.Init.Mode = CAN_MODE_NORMAL;
-  hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_1TQ;
-  hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
-  hcan.Init.TimeTriggeredMode = DISABLE;
-  hcan.Init.AutoBusOff = DISABLE;
-  hcan.Init.AutoWakeUp = DISABLE;
-  hcan.Init.AutoRetransmission = DISABLE;
-  hcan.Init.ReceiveFifoLocked = DISABLE;
-  hcan.Init.TransmitFifoPriority = DISABLE;
-  if (HAL_CAN_Init(&hcan) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN CAN_Init 2 */
-
-  /* USER CODE END CAN_Init 2 */
-
-}
-
-/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -221,7 +185,6 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
