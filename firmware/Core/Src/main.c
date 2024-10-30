@@ -42,9 +42,9 @@
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-#define BRAKE_BRIGHTNESS 10
-#define BACKUP_BRIGHTNESS 10
-#define TURN_BRIGHTNESS 10
+#define BRAKE_BRIGHTNESS 5
+#define BACKUP_BRIGHTNESS 5
+#define TURN_BRIGHTNESS 5
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/

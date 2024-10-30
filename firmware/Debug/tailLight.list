@@ -39,9 +39,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_line   00009403  00000000  00000000  000407e2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000841c3  00000000  00000000  00049be5  2**0
+ 18 .debug_str    000841c0  00000000  00000000  00049be5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  000cdda8  2**0
+ 19 .comment      00000050  00000000  00000000  000cdda5  2**0
                   CONTENTS, READONLY
  20 .debug_frame  000025f0  00000000  00000000  000cddf8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -574,7 +574,7 @@ void checkLEDState(void){
 		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, BACKUP_BRIGHTNESS);
  8000426:	4b0e      	ldr	r3, [pc, #56]	; (8000460 <checkLEDState+0x74>)
  8000428:	681b      	ldr	r3, [r3, #0]
- 800042a:	220a      	movs	r2, #10
+ 800042a:	2205      	movs	r2, #5
  800042c:	641a      	str	r2, [r3, #64]	; 0x40
  800042e:	e003      	b.n	8000438 <checkLEDState+0x4c>
 	}
@@ -596,7 +596,7 @@ void checkLEDState(void){
 		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, TURN_BRIGHTNESS);
  8000446:	4b06      	ldr	r3, [pc, #24]	; (8000460 <checkLEDState+0x74>)
  8000448:	681b      	ldr	r3, [r3, #0]
- 800044a:	220a      	movs	r2, #10
+ 800044a:	2205      	movs	r2, #5
  800044c:	635a      	str	r2, [r3, #52]	; 0x34
 	}
 	else{
